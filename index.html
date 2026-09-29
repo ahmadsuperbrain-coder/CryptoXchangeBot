@@ -1,49 +1,257 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <script src="https://quge5.com/88/tag.min.js" data-zone="193853" async data-cfasync="false"></script>
 <meta charset="UTF-8">
-<title>Crypto Converter Bot</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#6c5ce7">
+
+<title>Viral Caption & Hashtag Generator</title>
 
 <style>
-body {
-  font-family: Arial, sans-serif;
-  background: #0f172a;
-  color: #fff;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
+*{
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
 }
-.container {
-  background: #1e293b;
-  padding: 20px;
-  border-radius: 12px;
-  width: 100%;
-  max-width: 350px;
-  text-align: center;
+
+body{
+    font-family:Arial,Helvetica,sans-serif;
+    background:linear-gradient(135deg,#f5f7ff,#eef1ff);
+    color:#222;
+    min-height:100vh;
 }
-h2 {
-  margin-bottom: 15px;
+
+.container{
+    width:100%;
+    max-width:900px;
+    margin:auto;
+    padding:25px 15px 50px;
 }
-select, input, button {
-  width: 100%;
-  padding: 10px;
-  margin: 8px 0;
-  border-radius: 8px;
-  border: none;
-  font-size: 16px;
+
+.header{
+    text-align:center;
+    margin-bottom:25px;
 }
-button {
-  background: #22c55e;
-  color: #000;
-  font-weight: bold;
-  cursor: pointer;
+
+.logo{
+    width:70px;
+    height:70px;
+    margin:auto;
+    border-radius:22px;
+    background:linear-gradient(135deg,#6c5ce7,#8e44ad);
+    color:white;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:32px;
+    box-shadow:0 10px 30px rgba(108,92,231,.25);
 }
-.result {
-  margin-top: 15px;
-  font-size: 18px;
+
+h1{
+    margin-top:15px;
+    font-size:30px;
+}
+
+.subtitle{
+    color:#666;
+    margin-top:8px;
+    font-size:15px;
+}
+
+.card{
+    background:#fff;
+    border-radius:20px;
+    padding:22px;
+    margin-bottom:20px;
+    box-shadow:0 8px 30px rgba(0,0,0,.07);
+}
+
+label{
+    display:block;
+    font-weight:bold;
+    margin-bottom:8px;
+    font-size:14px;
+}
+
+textarea,
+select,
+input{
+    width:100%;
+    border:1px solid #ddd;
+    border-radius:12px;
+    padding:13px 14px;
+    font-size:15px;
+    outline:none;
+    transition:.2s;
+    background:#fff;
+}
+
+textarea{
+    min-height:120px;
+    resize:vertical;
+}
+
+textarea:focus,
+select:focus,
+input:focus{
+    border-color:#6c5ce7;
+    box-shadow:0 0 0 3px rgba(108,92,231,.1);
+}
+
+.form-group{
+    margin-bottom:18px;
+}
+
+.grid{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:15px;
+}
+
+.btn-row{
+    display:flex;
+    gap:10px;
+    flex-wrap:wrap;
+}
+
+button{
+    border:0;
+    border-radius:12px;
+    padding:13px 18px;
+    cursor:pointer;
+    font-size:15px;
+    font-weight:bold;
+    transition:.2s;
+}
+
+button:hover{
+    transform:translateY(-1px);
+}
+
+.generate{
+    flex:1;
+    background:linear-gradient(135deg,#6c5ce7,#8e44ad);
+    color:#fff;
+}
+
+.random{
+    background:#f1efff;
+    color:#5b4bc4;
+}
+
+.clear{
+    background:#ffecec;
+    color:#d63031;
+}
+
+.result-box{
+    position:relative;
+    background:#f8f8ff;
+    border:1px solid #e3e0ff;
+    border-radius:15px;
+    padding:18px;
+    margin-top:12px;
+    white-space:pre-wrap;
+    line-height:1.6;
+    min-height:100px;
+}
+
+.result-title{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:10px;
+}
+
+.result-title h2{
+    font-size:19px;
+}
+
+.copy-btn{
+    background:#6c5ce7;
+    color:white;
+    padding:9px 14px;
+    font-size:13px;
+}
+
+.hashtags{
+    color:#5b4bc4;
+    font-weight:600;
+}
+
+.tip{
+    background:#fff8df;
+    border-left:4px solid #f1c40f;
+    padding:13px;
+    border-radius:8px;
+    color:#665500;
+    font-size:14px;
+    line-height:1.5;
+}
+
+.counter{
+    text-align:right;
+    font-size:12px;
+    color:#888;
+    margin-top:5px;
+}
+
+.footer{
+    text-align:center;
+    color:#777;
+    font-size:13px;
+    margin-top:25px;
+}
+
+.toast{
+    position:fixed;
+    bottom:25px;
+    left:50%;
+    transform:translateX(-50%) translateY(100px);
+    background:#222;
+    color:white;
+    padding:12px 18px;
+    border-radius:10px;
+    font-size:14px;
+    opacity:0;
+    transition:.3s;
+    z-index:999;
+}
+
+.toast.show{
+    transform:translateX(-50%) translateY(0);
+    opacity:1;
+}
+
+@media(max-width:600px){
+    .container{
+        padding:18px 12px 40px;
+    }
+
+    h1{
+        font-size:24px;
+    }
+
+    .grid{
+        grid-template-columns:1fr;
+    }
+
+    .card{
+        padding:17px;
+    }
+
+    .btn-row button{
+        width:100%;
+    }
+
+    .result-title{
+        align-items:flex-start;
+        flex-direction:column;
+    }
+
+    .copy-btn{
+        width:100%;
+    }
 }
 </style>
 </head>
@@ -51,46 +259,833 @@ button {
 <body>
 
 <div class="container">
-  <h2>💱 Crypto Converter</h2>
 
-  <select id="crypto">
-    <option value="bitcoin">Bitcoin (BTC)</option>
-    <option value="ethereum">Ethereum (ETH)</option>
-    <option value="tether">Tether (USDT)</option>
-  </select>
+    <div class="header">
+        <div class="logo">🔥</div>
 
-  <input type="number" id="amount" placeholder="Enter amount" />
+        <h1>Viral Caption & Hashtag Generator</h1>
 
-  <button onclick="convert()">Convert to USD</button>
+        <p class="subtitle">
+            Create engaging captions and trending-style hashtags in seconds.
+        </p>
+    </div>
 
-  <div class="result" id="result"></div>
+    <div class="card">
+
+        <div class="form-group">
+            <label for="topic">What is your post about?</label>
+
+            <textarea
+                id="topic"
+                maxlength="500"
+                placeholder="Example: How to make money online, new smartphone, scholarship, crypto tips..."
+            ></textarea>
+
+            <div class="counter">
+                <span id="charCount">0</span>/500
+            </div>
+        </div>
+
+        <div class="grid">
+
+            <div class="form-group">
+                <label for="platform">Platform</label>
+
+                <select id="platform">
+                    <option value="facebook">Facebook</option>
+                    <option value="tiktok">TikTok</option>
+                    <option value="instagram">Instagram</option>
+                    <option value="youtube">YouTube</option>
+                    <option value="x">X / Twitter</option>
+                    <option value="linkedin">LinkedIn</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="tone">Caption Style</label>
+
+                <select id="tone">
+                    <option value="viral">Viral / Attention-Grabbing</option>
+                    <option value="professional">Professional</option>
+                    <option value="funny">Funny</option>
+                    <option value="motivational">Motivational</option>
+                    <option value="question">Question / Engagement</option>
+                    <option value="story">Storytelling</option>
+                    <option value="short">Short & Powerful</option>
+                </select>
+            </div>
+
+        </div>
+
+        <div class="grid">
+
+            <div class="form-group">
+                <label for="language">Language</label>
+
+                <select id="language">
+                    <option value="english">English</option>
+                    <option value="hausa">Hausa</option>
+                    <option value="mixed">Hausa + English</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="hashtagCount">Number of Hashtags</label>
+
+                <select id="hashtagCount">
+                    <option value="5">5 Hashtags</option>
+                    <option value="10" selected>10 Hashtags</option>
+                    <option value="15">15 Hashtags</option>
+                    <option value="20">20 Hashtags</option>
+                </select>
+            </div>
+
+        </div>
+
+        <div class="btn-row">
+            <button class="generate" onclick="generateContent()">
+                ✨ Generate Viral Content
+            </button>
+
+            <button class="random" onclick="randomExample()">
+                🎲 Random
+            </button>
+
+            <button class="clear" onclick="clearAll()">
+                🗑 Clear
+            </button>
+        </div>
+
+    </div>
+
+
+    <div class="card">
+
+        <div class="result-title">
+            <h2>📝 Generated Caption</h2>
+
+            <button class="copy-btn" onclick="copyCaption()">
+                📋 Copy Caption
+            </button>
+        </div>
+
+        <div id="captionResult" class="result-box">
+Your generated caption will appear here...
+        </div>
+
+    </div>
+
+
+    <div class="card">
+
+        <div class="result-title">
+            <h2>🚀 Generated Hashtags</h2>
+
+            <button class="copy-btn" onclick="copyHashtags()">
+                📋 Copy Hashtags
+            </button>
+        </div>
+
+        <div id="hashtagResult" class="result-box hashtags">
+Your hashtags will appear here...
+        </div>
+
+    </div>
+
+
+    <div class="card">
+
+        <div class="tip">
+            💡 <strong>Tip:</strong>
+            Don't use hashtags randomly. Choose hashtags that are closely related
+            to your content and audience. Combine broad, niche and topic-specific
+            hashtags for better relevance.
+        </div>
+
+    </div>
+
+
+    <div class="footer">
+        © 2026 Viral Caption & Hashtag Generator
+    </div>
+
 </div>
 
+<div id="toast" class="toast">
+    Copied successfully!
+</div>
+
+
 <script>
-async function convert() {
-  const crypto = document.getElementById("crypto").value;
-  const amount = document.getElementById("amount").value;
 
-  if (amount === "" || amount <= 0) {
-    alert("Enter valid amount");
-    return;
-  }
+const topicInput = document.getElementById("topic");
 
-  const url = `https://api.coingecko.com/api/v3/simple/price?ids=${crypto}&vs_currencies=usd`;
+topicInput.addEventListener("input", function(){
 
-  try {
-    const res = await fetch(url);
-    const data = await res.json();
-    const price = data[crypto].usd;
-    const total = price * amount;
+    document.getElementById("charCount").textContent =
+        this.value.length;
 
-    document.getElementById("result").innerHTML =
-      `💰 ${amount} ${crypto.toUpperCase()} = <b>$${total.toFixed(2)}</b>`;
-  } catch (error) {
-    document.getElementById("result").innerHTML =
-      "⚠️ Error fetching price";
-  }
+});
+
+
+/* -----------------------------
+   CAPTION DATABASE
+----------------------------- */
+
+const captions = {
+
+viral: [
+"🔥 STOP SCROLLING! {topic} is something you seriously need to know about! 👀",
+"🚨 This might be one of the most useful things you'll see today about {topic}. Save this post! 🔥",
+"Wait... did you know this about {topic}? 😳👇",
+"Most people don't know this about {topic}. Now you do. 🚀",
+"🔥 If you're interested in {topic}, you need to see this!",
+"This is your sign to learn more about {topic}. 👀✨",
+"One simple idea about {topic} that could change the way you think. 💡",
+"Don't just scroll past this one. {topic} deserves your attention. 🔥",
+"POV: You finally discover the truth about {topic}. 👀",
+"Here is something about {topic} that nobody told you. 🤯"
+],
+
+professional: [
+"Here is a practical guide to understanding {topic}.",
+"Let's take a closer look at {topic} and why it matters.",
+"Everything you need to know about {topic}, explained simply.",
+"Understanding {topic} can help you make better decisions.",
+"Here are some important things to consider when it comes to {topic}.",
+"Let's break down {topic} into simple and useful steps."
+],
+
+funny: [
+"Me pretending I understand {topic} after watching one video 😂",
+"I came for {topic} and somehow stayed for the drama 😂🔥",
+"Nobody: Absolutely nobody: Me at 2AM researching {topic}: 👀😂",
+"POV: You said you weren't interested in {topic... and now you're an expert 😂",
+"{topic} really said: 'You thought you knew me?' 😂",
+"Learning about {topic} like... 🤯😂"
+],
+
+motivational: [
+"🚀 Don't wait for the perfect moment. Start learning about {topic} today.",
+"Your future self will thank you for taking action on {topic.} 💪",
+"Small steps in {topic} can lead to big results. Keep going! 🔥",
+"Success starts with learning. Take the first step with {topic}. 🚀",
+"Don't underestimate what consistent effort can do when it comes to {topic}. 💯",
+"Learn. Practice. Improve. Repeat. That's how you master {topic}. 🔥"
+],
+
+question: [
+"What do you think about {topic}? 👇",
+"Have you ever tried {topic}? Tell me your experience in the comments. 👇",
+"Did you already know this about {topic}? 🤔",
+"Would you try this? 👀 Let me know below!",
+"What's your biggest question about {topic}?",
+"If you could change one thing about {topic}, what would it be?"
+],
+
+story: [
+"I didn't understand {topic} at first. Then I discovered something that changed everything...",
+"Let me tell you a quick story about {topic}. 👇",
+"At first, I thought {topic} was complicated. I was wrong.",
+"Here's what happened when I started learning about {topic}...",
+"My journey with {topic} taught me one important lesson.",
+"I wish someone had explained {topic} to me this way from the beginning."
+],
+
+short: [
+"{topic} — simple, useful and worth knowing. 🔥",
+"Learn more. Do more. {topic}. 🚀",
+"{topic}. That's the post. 👀",
+"Think differently about {topic}. 💡",
+"{topic} made simple. 🔥",
+"Save this for later: {topic}. 📌"
+]
+
+};
+
+
+/* -----------------------------
+   HAUSA CAPTIONS
+----------------------------- */
+
+const hausaCaptions = {
+
+viral: [
+"🔥 KADA KA WUCE! Ga abin da ya kamata ka sani game da {topic}. 👀",
+"🚨 Mutane da yawa ba su san wannan game da {topic} ba. Yanzu kai ma ka sani! 🔥",
+"Ka taɓa sanin wannan game da {topic}? 😳👇",
+"Abu ɗaya game da {topic} da zai iya baka mamaki. 🤯",
+"🔥 Idan kana sha'awar {topic}, wannan post ɗin naka ne!",
+"Kar ka yi scrolling kawai. 👀 Ga wani muhimmin bayani game da {topic}.",
+"Ga abin da mutane da yawa ba sa gaya maka game da {topic}. 🔥"
+],
+
+professional: [
+"Ga wasu muhimman bayanai da ya kamata ka sani game da {topic}.",
+"Mu duba {topic} cikin sauƙi da fahimta.",
+"Ga cikakken bayani kan {topic} da yadda yake da muhimmanci.",
+"Fahimtar {topic} na iya taimaka maka wajen yanke shawara mai kyau.",
+"Ga wasu abubuwa masu muhimmanci da ya kamata ka kula da su game da {topic}."
+],
+
+funny: [
+"Ni kuma bayan na kalli video ɗaya game da {topic}: na zama expert 😂",
+"Na zo ne kawai saboda {topic}, amma sai na makale 😂🔥",
+"POV: Ka ce ba ka damu da {topic} ba, amma yanzu kana bincikensa da ƙarfe 2 na dare 😂",
+"{topic} ya ce: Ka yi tunanin ka san komai? 😂",
+"Ni ina koyon {topic} kamar haka... 🤯😂"
+],
+
+motivational: [
+"🚀 Kada ka jira lokaci mafi kyau. Fara koyon {topic} yau.",
+"Ƙananan matakai a {topic} na iya kai ka ga babban sakamako. 💪",
+"Ka fara yau. Ka koya. Ka gwada. Ka inganta. 🔥",
+"Nasara tana farawa da koyo. Fara da {topic}. 🚀",
+"Kar ka raina ƙananan ƙoƙari idan ana maganar {topic}. 💯"
+],
+
+question: [
+"Me kake tunani game da {topic}? 👇",
+"Ka taɓa gwada {topic}? Faɗa mana experience ɗinka a comment. 👇",
+"Ka riga ka san wannan game da {topic}? 🤔",
+"Za ka gwada wannan? 👀 Faɗa mana a comment.",
+"Me kake son sani game da {topic}?"
+],
+
+story: [
+"Da farko ban fahimci {topic} ba. Sai na gano wani abu da ya canza komai...",
+"Bari in ba ku ɗan labari game da {topic}. 👇",
+"Da farko na ɗauka {topic} abu ne mai wahala. Sai na gane ba haka ba.",
+"Ga abin da ya faru lokacin da na fara koyon {topic}...",
+"Abin da na koya daga {topic} shi ne..."
+],
+
+short: [
+"{topic} — mai sauƙi, mai amfani kuma ya cancanci sani. 🔥",
+"Ka koya. Ka gwada. {topic}. 🚀",
+"{topic}. Wannan shi ne post ɗin. 👀",
+"Ka kalli {topic} da sabon tunani. 💡",
+"{topic} cikin sauƙi. 🔥",
+"Ka ajiye wannan: {topic}. 📌"
+]
+
+};
+
+
+/* -----------------------------
+   HASHTAG DATABASE
+----------------------------- */
+
+const hashtagGroups = {
+
+technology: [
+"#Technology",
+"#Tech",
+"#TechNews",
+"#TechTips",
+"#Innovation",
+"#Digital",
+"#Internet",
+"#OnlineBusiness",
+"#TechCommunity",
+"#DigitalSkills"
+],
+
+money: [
+"#Money",
+"#MakeMoneyOnline",
+"#OnlineBusiness",
+"#BusinessTips",
+"#Entrepreneur",
+"#Entrepreneurship",
+"#FinancialTips",
+"#SideHustle",
+"#Income",
+"#Business"
+],
+
+education: [
+"#Education",
+"#Scholarship",
+"#Scholarships",
+"#Students",
+"#Study",
+"#StudyTips",
+"#Learning",
+"#StudentsLife",
+"#Career",
+"#EducationTips"
+],
+
+crypto: [
+"#Crypto",
+"#Cryptocurrency",
+"#Bitcoin",
+"#Ethereum",
+"#Solana",
+"#DeFi",
+"#Web3",
+"#Blockchain",
+"#CryptoTrading",
+"#CryptoNews"
+],
+
+programming: [
+"#Programming",
+"#Coding",
+"#WebDevelopment",
+"#JavaScript",
+"#HTML",
+"#CSS",
+"#PHP",
+"#Python",
+"#Developer",
+"#CodingTips"
+],
+
+general: [
+"#Viral",
+"#Trending",
+"#Explore",
+"#FYP",
+"#ForYou",
+"#ContentCreator",
+"#ViralPost",
+"#TrendingNow",
+"#SocialMedia",
+"#DailyContent"
+]
+
+};
+
+
+/* -----------------------------
+   RANDOM EXAMPLES
+----------------------------- */
+
+const examples = [
+"How to make money online",
+"Latest smartphone technology",
+"Scholarship opportunities",
+"How to learn programming",
+"Crypto trading tips",
+"How to grow on TikTok",
+"Online business ideas",
+"AI tools everyone should know",
+"Best study tips for students",
+"How to build a personal brand",
+"Web development tips",
+"Digital marketing"
+];
+
+
+/* -----------------------------
+   DETECT NICHE
+----------------------------- */
+
+function detectNiche(topic){
+
+    const text = topic.toLowerCase();
+
+    if(
+        text.includes("crypto") ||
+        text.includes("bitcoin") ||
+        text.includes("solana") ||
+        text.includes("token") ||
+        text.includes("blockchain") ||
+        text.includes("trading")
+    ){
+        return "crypto";
+    }
+
+    if(
+        text.includes("money") ||
+        text.includes("business") ||
+        text.includes("income") ||
+        text.includes("make money") ||
+        text.includes("entrepreneur") ||
+        text.includes("marketing")
+    ){
+        return "money";
+    }
+
+    if(
+        text.includes("school") ||
+        text.includes("student") ||
+        text.includes("scholarship") ||
+        text.includes("education") ||
+        text.includes("study") ||
+        text.includes("degree") ||
+        text.includes("phd")
+    ){
+        return "education";
+    }
+
+    if(
+        text.includes("code") ||
+        text.includes("coding") ||
+        text.includes("programming") ||
+        text.includes("php") ||
+        text.includes("javascript") ||
+        text.includes("html") ||
+        text.includes("css") ||
+        text.includes("python")
+    ){
+        return "programming";
+    }
+
+    if(
+        text.includes("tech") ||
+        text.includes("phone") ||
+        text.includes("computer") ||
+        text.includes("software") ||
+        text.includes("ai") ||
+        text.includes("internet")
+    ){
+        return "technology";
+    }
+
+    return "general";
 }
+
+
+/* -----------------------------
+   FORMAT TOPIC
+----------------------------- */
+
+function cleanTopic(topic){
+
+    topic = topic.trim();
+
+    if(topic.length === 0){
+        return "";
+    }
+
+    return topic.replace(/[.!?]+$/,"");
+}
+
+
+/* -----------------------------
+   GENERATE CAPTION
+----------------------------- */
+
+function generateCaption(topic,tone,language){
+
+    let list;
+
+    if(language === "hausa"){
+        list = hausaCaptions[tone];
+    }
+    else if(language === "mixed"){
+
+        const english = captions[tone];
+        const hausa = hausaCaptions[tone];
+
+        list = english.concat(hausa);
+    }
+    else{
+        list = captions[tone];
+    }
+
+    const random =
+        list[Math.floor(Math.random() * list.length)];
+
+    return random.replace(/\{topic\}/gi,topic);
+}
+
+
+/* -----------------------------
+   GENERATE HASHTAGS
+----------------------------- */
+
+function generateHashtags(topic,count){
+
+    const niche = detectNiche(topic);
+
+    let hashtags = [...hashtagGroups[niche]];
+
+    hashtags = hashtags.concat(hashtagGroups.general);
+
+    /*
+       Create hashtags from words in topic
+    */
+
+    const words = topic
+        .replace(/[^a-zA-Z0-9\s]/g,"")
+        .split(/\s+/)
+        .filter(word => word.length > 2);
+
+    words.forEach(word => {
+
+        const tag =
+            "#" + word.charAt(0).toUpperCase() + word.slice(1);
+
+        if(!hashtags.includes(tag)){
+            hashtags.unshift(tag);
+        }
+
+    });
+
+    /*
+       Remove duplicates
+    */
+
+    hashtags = [...new Set(hashtags)];
+
+    /*
+       Shuffle
+    */
+
+    hashtags.sort(() => Math.random() - 0.5);
+
+    return hashtags.slice(0,count).join(" ");
+}
+
+
+/* -----------------------------
+   MAIN GENERATOR
+----------------------------- */
+
+function generateContent(){
+
+    const topic =
+        cleanTopic(document.getElementById("topic").value);
+
+    const tone =
+        document.getElementById("tone").value;
+
+    const language =
+        document.getElementById("language").value;
+
+    const count =
+        parseInt(document.getElementById("hashtagCount").value);
+
+    if(!topic){
+
+        showToast("Please enter your topic first.");
+
+        document.getElementById("topic").focus();
+
+        return;
+    }
+
+    const caption =
+        generateCaption(topic,tone,language);
+
+    const hashtags =
+        generateHashtags(topic,count);
+
+    document.getElementById("captionResult").textContent =
+        caption;
+
+    document.getElementById("hashtagResult").textContent =
+        hashtags;
+
+}
+
+
+/* -----------------------------
+   RANDOM EXAMPLE
+----------------------------- */
+
+function randomExample(){
+
+    const random =
+        examples[Math.floor(Math.random() * examples.length)];
+
+    document.getElementById("topic").value = random;
+
+    document.getElementById("charCount").textContent =
+        random.length;
+
+    const tones = [
+        "viral",
+        "professional",
+        "funny",
+        "motivational",
+        "question",
+        "story",
+        "short"
+    ];
+
+    const randomTone =
+        tones[Math.floor(Math.random() * tones.length)];
+
+    document.getElementById("tone").value =
+        randomTone;
+
+    generateContent();
+
+}
+
+
+/* -----------------------------
+   CLEAR
+----------------------------- */
+
+function clearAll(){
+
+    document.getElementById("topic").value = "";
+
+    document.getElementById("charCount").textContent = "0";
+
+    document.getElementById("captionResult").textContent =
+        "Your generated caption will appear here...";
+
+    document.getElementById("hashtagResult").textContent =
+        "Your hashtags will appear here...";
+
+}
+
+
+/* -----------------------------
+   COPY CAPTION
+----------------------------- */
+
+function copyCaption(){
+
+    const text =
+        document.getElementById("captionResult").textContent;
+
+    if(
+        text === "Your generated caption will appear here..."
+    ){
+        showToast("Generate a caption first.");
+        return;
+    }
+
+    copyText(text);
+}
+
+
+/* -----------------------------
+   COPY HASHTAGS
+----------------------------- */
+
+function copyHashtags(){
+
+    const text =
+        document.getElementById("hashtagResult").textContent;
+
+    if(
+        text === "Your hashtags will appear here..."
+    ){
+        showToast("Generate hashtags first.");
+        return;
+    }
+
+    copyText(text);
+}
+
+
+/* -----------------------------
+   COPY FUNCTION
+----------------------------- */
+
+function copyText(text){
+
+    if(navigator.clipboard){
+
+        navigator.clipboard.writeText(text)
+        .then(() => {
+
+            showToast("Copied successfully! ✅");
+
+        })
+        .catch(() => {
+
+            fallbackCopy(text);
+
+        });
+
+    }
+    else{
+
+        fallbackCopy(text);
+
+    }
+
+}
+
+
+/* -----------------------------
+   FALLBACK COPY
+----------------------------- */
+
+function fallbackCopy(text){
+
+    const textarea =
+        document.createElement("textarea");
+
+    textarea.value = text;
+
+    document.body.appendChild(textarea);
+
+    textarea.select();
+
+    document.execCommand("copy");
+
+    textarea.remove();
+
+    showToast("Copied successfully! ✅");
+
+}
+
+
+/* -----------------------------
+   TOAST
+----------------------------- */
+
+function showToast(message){
+
+    const toast =
+        document.getElementById("toast");
+
+    toast.textContent = message;
+
+    toast.classList.add("show");
+
+    setTimeout(() => {
+
+        toast.classList.remove("show");
+
+    },2500);
+
+}
+
+
+/* -----------------------------
+   ENTER SHORTCUT
+----------------------------- */
+
+document.getElementById("topic")
+.addEventListener("keydown",function(event){
+
+    if(event.ctrlKey && event.key === "Enter"){
+
+        generateContent();
+
+    }
+
+});
+
+
+/* -----------------------------
+   DEFAULT DEMO
+----------------------------- */
+
+window.addEventListener("load",function(){
+
+    document.getElementById("topic").value =
+        "How to make money online";
+
+    document.getElementById("charCount").textContent =
+        document.getElementById("topic").value.length;
+
+    generateContent();
+
+});
+
 </script>
 
 </body>
